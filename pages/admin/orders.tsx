@@ -1,7 +1,7 @@
 
 import { ConfirmationNumberOutlined } from '@mui/icons-material'
 import { Chip, Grid } from '@mui/material'
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 import useSWR from 'swr';
 
 import { AdminLayout } from '../../components/layouts'
@@ -16,7 +16,7 @@ const columns:GridColDef[] = [
     {
         field: 'isPaid',
         headerName: 'Pagada',
-        renderCell: ({ row }: GridValueGetterParams) => {
+        renderCell: ({ row }: GridRenderCellParams) => {
             return row.isPaid
                 ? ( <Chip variant='outlined' label="Pagada" color="success" /> )
                 : ( <Chip variant='outlined' label="Pendiente" color="error" /> )
@@ -26,7 +26,7 @@ const columns:GridColDef[] = [
     {
         field: 'check',
         headerName: 'Ver orden',
-        renderCell: ({ row }: GridValueGetterParams) => {
+        renderCell: ({ row }: GridRenderCellParams) => {
             return (
                 <a href={ `/admin/orders/${ row.id }` } target="_blank" rel="noreferrer" >
                     Ver orden

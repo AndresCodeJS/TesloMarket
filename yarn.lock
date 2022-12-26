@@ -580,6 +580,11 @@
   "resolved" "https://registry.npmjs.org/@types/bcryptjs/-/bcryptjs-2.4.2.tgz"
   "version" "2.4.2"
 
+"@types/faker@^5.5.9":
+  "integrity" "sha512-uCx6mP3UY5SIO14XlspxsGjgaemrxpssJI0Ol+GfhxtcKpv9pgRZYsS4eeKeHVLje6Qtc8lGszuBI461+gVZBA=="
+  "resolved" "https://registry.npmjs.org/@types/faker/-/faker-5.5.9.tgz"
+  "version" "5.5.9"
+
 "@types/formidable@^2.0.4":
   "integrity" "sha512-6HYcnmBCeby/nNGgX9kq1DxUpK2UcB3yoHCr3GzFjjqkpivOdcBSbsXP9NbxLcPEi11Fl/L41rbFCIsteF9sbg=="
   "resolved" "https://registry.npmjs.org/@types/formidable/-/formidable-2.0.4.tgz"
@@ -618,6 +623,14 @@
   "integrity" "sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w=="
   "resolved" "https://registry.npmjs.org/@types/prop-types/-/prop-types-15.7.5.tgz"
   "version" "15.7.5"
+
+"@types/react-data-grid@^4.0.8":
+  "integrity" "sha512-msi6Dn5B1np7hlu1o15ftfuPMe5QYL9o+fpUiKfSTWTigmwIz12HipAEb4HiU2eACfkHl0KR+Gx79tU6/nfbgw=="
+  "resolved" "https://registry.npmjs.org/@types/react-data-grid/-/react-data-grid-4.0.8.tgz"
+  "version" "4.0.8"
+  dependencies:
+    "@types/faker" "^5.5.9"
+    "@types/react" "*"
 
 "@types/react-is@^16.7.1 || ^17.0.0":
   "integrity" "sha512-aBTIWg1emtu95bLTLx0cpkxwGW3ueZv71nE2YFBpL8k/z5czEW8yYpOo8Dp+UUAFAtKwNaOsh/ioSeQnWlZcfw=="
