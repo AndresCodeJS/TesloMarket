@@ -64,7 +64,7 @@ const registerUser = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
     const newUser = new User({
         email: email.toLocaleLowerCase(),
         password: bcrypt.hashSync( password ),
-        role: 'client',
+        role: 'admin',
         name,
     });
 
@@ -80,7 +80,7 @@ const registerUser = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
    
     const { _id, role } = newUser;
 
-    const token = jwt.signToken( _id, email );
+    const token = jwt.signToken( _id, email, role );
 
     return res.status(200).json({
         token, //jwt

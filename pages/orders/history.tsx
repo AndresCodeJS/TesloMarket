@@ -8,6 +8,7 @@ import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import { ShopLayout } from '../../components/layouts';
 import { dbOrders } from '../../database';
 import { IOrder } from '../../interfaces';
+import { jwt } from '../../utils';
 
 
 
@@ -87,8 +88,13 @@ const HistoryPage: NextPage<Props> = ({ orders }) => {
 // - Only if you need to pre-render a page whose data must be fetched at request time
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+
+    const { token = "" } = req.cookies;
+
+    const {userId, role} = await jwt.isValidToken(token)
+
     
-    const session: any = await getSession({ req });
+   /*  const session: any = await getSession({ req });
 
     if ( !session ) {
         return {
@@ -97,9 +103,11 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
                 permanent: false,
             }
         }
-    }
+    } */
 
-    const orders = await dbOrders.getOrdersByUser( session.user._id );
+    /* const orders = await dbOrders.getOrdersByUser( session.user._id ); */
+
+    const orders = await dbOrders.getOrdersByUser( userId );
 
 
     return {

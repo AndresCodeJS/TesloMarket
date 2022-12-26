@@ -12,6 +12,7 @@ import { CartList, OrderSummary } from '../../components/cart';
 import { dbOrders } from '../../database';
 import { IOrder } from '../../interfaces';
 import { tesloApi } from '../../api';
+import { jwt } from '../../utils';
 
 
 export type OrderResponseBody = {
@@ -193,9 +194,15 @@ const OrderPage: NextPage<Props> = ({ order }) => {
 export const getServerSideProps: GetServerSideProps = async ({ req, query }) => {
     
     const { id = '' } = query;
-    const session:any = await getSession({ req });
+    /* const session:any = await getSession({ req }); */
 
-    if ( !session ) {
+    const { token = "" } = req.cookies;
+
+    const {userId} = await jwt.isValidToken(token)
+
+
+
+    if ( !userId ) {
         return {
             redirect: {
                 destination: `/auth/login?p=/orders/${ id }`,
@@ -215,7 +222,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, query }) => 
         }
     }
 
-    if ( order.user !== session.user._id ) {
+    if ( order.user !== userId ) {
         return {
             redirect: {
                 destination: '/orders/history',

@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
 
 import NextLink from 'next/link';
-import { signIn, getSession } from 'next-auth/react';
+/* import { signIn, getSession } from 'next-auth/react'; */
 
 import { useForm } from 'react-hook-form';
 import { Box, Button, Chip, Grid, Link, TextField, Typography } from '@mui/material';
@@ -11,7 +11,7 @@ import { ErrorOutline } from '@mui/icons-material';
 
 import { AuthContext } from '../../context';
 import { AuthLayout } from '../../components/layouts'
-import { validations } from '../../utils';
+import { jwt, validations } from '../../utils';
 
 
 type FormData = {
@@ -44,10 +44,10 @@ const RegisterPage = () => {
         }
         
         // Todo: navegar a la pantalla que el usuario estaba
-        // const destination = router.query.p?.toString() || '/';
-        // router.replace(destination);
+        const destination = router.query.p?.toString() || '/';
+        router.replace(destination);
 
-        await signIn('credentials',{ email, password });
+        /* await signIn('credentials',{ email, password }); */
 
     }
 
@@ -143,19 +143,29 @@ const RegisterPage = () => {
 
 export const getServerSideProps: GetServerSideProps = async ({ req, query }) => {
     
-    const session = await getSession({ req });
+    /* const session = await getSession({ req }); */
     // console.log({session});
 
+    const { token = "" } = req.cookies;
     const { p = '/' } = query;
 
-    if ( session ) {
-        return {
-            redirect: {
-                destination: p.toString(),
-                permanent: false
+    try{
+
+        const { role } = await jwt.isValidToken(token);
+        
+        if ( role ) {
+            return {
+                redirect: {
+                    destination: p.toString(),
+                    permanent: false
+                }
             }
         }
+    }catch(error){
+        console.log(error)
     }
+
+   
 
 
     return {
