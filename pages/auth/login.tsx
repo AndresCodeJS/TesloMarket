@@ -169,15 +169,13 @@ const LoginPage = () => {
 // You should use getServerSideProps when:
 // - Only if you need to pre-render a page whose data must be fetched at request time
 
-export const getServerSideProps: GetServerSideProps = async ({
+/* export const getServerSideProps: GetServerSideProps = async ({
   req,
   query,
 }) => {
   const { token = "" } = req.cookies;
   const { p = "/" } = query;
-  // return new Response('No autorizado', {
-  //     status: 401
-  // });
+
   try {
     console.log("ENTRA EN LA VALIDACION");
     console.log("el token es:", token);
@@ -195,7 +193,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   } catch (error) {
     console.log( error);
-  }
+  } */
 
   /*  const session = await getSession({ req }); */
   // console.log({session});
@@ -211,9 +209,9 @@ export const getServerSideProps: GetServerSideProps = async ({
         }
     } */
 
-  return {
+/*   return {
     props: {},
   };
-};
+}; */
 
 export default LoginPage;
