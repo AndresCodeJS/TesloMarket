@@ -20,6 +20,8 @@ import { AuthLayout } from "../../components/layouts";
 import { jwt, validations } from "../../utils";
 import { useRouter } from "next/router";
 import { AuthContext } from "../../context";
+import Cookie from 'js-cookie';
+
 
 type FormData = {
   email: string;
@@ -39,12 +41,15 @@ const LoginPage = () => {
 
   /* const [providers, setProviders] = useState<any>({}); */
 
-  /* useEffect(() => {
-    getProviders().then((prov) => {
-      // console.log({prov});
-      setProviders(prov);
-    });
-  }, []); */
+  console.log('se jeecuta login2')
+
+  useEffect(() => {
+   /*  router.push('/') */
+    /* if(!Cookie.get('token')){
+        router.push('/')
+    } */
+  }, []);
+
 
   const onLoginUser = async ({ email, password }: FormData) => {
     setShowError(false);
@@ -213,5 +218,16 @@ const LoginPage = () => {
     props: {},
   };
 }; */
+
+export const getServerSideProps: GetServerSideProps = async ({
+    req,
+    query,
+  }) => {
+
+    return {
+        props: {},
+      };
+
+  }
 
 export default LoginPage;

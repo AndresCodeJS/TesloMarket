@@ -36,7 +36,7 @@ const loginUser = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
     await db.connect();
     const user = await User.findOne({ email });
     await db.disconnect();
-
+    
     if ( !user ) {
         return res.status(400).json({ message: 'Correo o contraseña no válidos - EMAIL' })
     }
