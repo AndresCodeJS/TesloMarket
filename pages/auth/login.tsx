@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { GetServerSideProps } from "next";
 import NextLink from "next/link";
+import { redirect } from "react-router-dom";
 /* import { signIn, getSession, getProviders } from "next-auth/react"; */
 
 import {
@@ -20,8 +21,7 @@ import { AuthLayout } from "../../components/layouts";
 import { jwt, validations } from "../../utils";
 import { useRouter } from "next/router";
 import { AuthContext } from "../../context";
-import Cookie from 'js-cookie';
-
+import Cookie from "js-cookie";
 
 type FormData = {
   email: string;
@@ -41,15 +41,12 @@ const LoginPage = () => {
 
   /* const [providers, setProviders] = useState<any>({}); */
 
-  console.log('se jeecuta login2')
-
   useEffect(() => {
-   /*  router.push('/') */
-    /* if(!Cookie.get('token')){
-        router.push('/')
-    } */
+    console.log(router.query)
+    if (Cookie.get("token")) {
+      router.replace("/");
+    }
   }, []);
-
 
   const onLoginUser = async ({ email, password }: FormData) => {
     setShowError(false);
@@ -65,6 +62,10 @@ const LoginPage = () => {
     router.replace(destination);
     /* await signIn('credentials',{ email, password }); */
   };
+
+  if (Cookie.get("token")) {
+    return <></>;
+  }
 
   return (
     <AuthLayout title={"Ingresar"}>
@@ -138,7 +139,7 @@ const LoginPage = () => {
               </NextLink>
             </Grid>
 
-           {/*  <Grid
+            {/*  <Grid
               item
               xs={12}
               display="flex"
@@ -200,10 +201,10 @@ const LoginPage = () => {
     console.log( error);
   } */
 
-  /*  const session = await getSession({ req }); */
-  // console.log({session});
+/*  const session = await getSession({ req }); */
+// console.log({session});
 
-  /* const { p = '/' } = query;
+/* const { p = '/' } = query;
 
     if ( session ) {
         return {
@@ -219,7 +220,7 @@ const LoginPage = () => {
   };
 }; */
 
-export const getServerSideProps: GetServerSideProps = async ({
+/* export const getServerSideProps: GetServerSideProps = async ({
     req,
     query,
   }) => {
@@ -228,6 +229,6 @@ export const getServerSideProps: GetServerSideProps = async ({
         props: {},
       };
 
-  }
+  } */
 
 export default LoginPage;

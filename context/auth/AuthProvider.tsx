@@ -48,7 +48,9 @@ export const AuthProvider:FC = ({ children }) => {
         }
 
         try {
-            const { data } = await tesloApi.get('/user/validate-token');
+            /* const { data } = await tesloApi.get('/user/validate-token'); */
+            const { data } = await axios.post('http://localhost:4545/user/validate-token', {token:Cookies.get('token')});
+            console.log('la data eeees:',data )
             const { token, user } = data;
             Cookies.set('token', token );
             dispatch({ type: '[Auth] - Login', payload: user });
@@ -63,7 +65,8 @@ export const AuthProvider:FC = ({ children }) => {
     const loginUser = async( email: string, password: string ): Promise<boolean> => {
 
         try {
-            const { data } = await tesloApi.post('/user/login', { email, password });
+            /* const { data } = await tesloApi.post('/user/login', { email, password }); */
+            const { data } = await axios.post('https://nodebackend-production.up.railway.app/user/login', { email, password });
             const { token, user } = data;
             Cookies.set('token', token );
             dispatch({ type: '[Auth] - Login', payload: user });
