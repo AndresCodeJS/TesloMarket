@@ -5,6 +5,8 @@ import { CartContext } from '../../context';
 import { ShopLayout } from '../../components/layouts/ShopLayout';
 import { CartList, OrderSummary } from '../../components/cart';
 import { useRouter } from 'next/router';
+import Cookie from "js-cookie";
+
 
 const CartPage = () => {
 
@@ -19,6 +21,13 @@ const CartPage = () => {
     
     if ( !isLoaded || cart.length === 0 ) {
         return (<></>);
+    }
+
+    const onCheckOut = () =>{
+        if(!Cookie.get('token')){
+            return router.push('/auth/login?p=/cart')
+        }
+        router.push('/checkout/address')
     }
 
     return (
@@ -42,7 +51,7 @@ const CartPage = () => {
                                     color="secondary"
                                     className='circular-btn' 
                                     fullWidth
-                                    href='/checkout/address'
+                                    onClick = {onCheckOut}
                                 >
                                     Checkout
                                 </Button>

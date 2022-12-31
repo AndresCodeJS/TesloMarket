@@ -36,9 +36,7 @@ const SummaryPage = () => {
             setErrorMessage( message );
             return;
         }
-
-        router.replace(`/orders/${ message }`);
-
+        router.replace(`/orders?p=${ message }`);
     }
 
 

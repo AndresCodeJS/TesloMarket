@@ -28,21 +28,21 @@ export type OrderResponseBody = {
 };
 
 
-interface Props {
+/* interface Props {
     orderId:string;
-}
+} */
 
-const OrderPage: NextPage<Props> = ({orderId}) => {
+const OrderPage = () => {
 
 
     const router = useRouter();
     /* const { shippingAddress } = order; */
     const [isPaying, setIsPaying] = useState(false);
     /* const [order, setOrder] = useState<IOrder>() */
-    const [order,getOrder] = useOrder(`${process.env.NEXT_PUBLIC_BACKEND_URL}/order/${orderId}`)
+    const [order,getOrder] = useOrder(`${process.env.NEXT_PUBLIC_BACKEND_URL}/order/${router.query.p}`)
 
     useEffect(()=>{
-        console.log('La ORDEN ES',order )
+        console.log('La ORDEN ES',router)
     },[order])
 
     const onOrderCompleted = async( details: OrderResponseBody ) => {
@@ -201,7 +201,7 @@ const OrderPage: NextPage<Props> = ({orderId}) => {
 // You should use getServerSideProps when:
 // - Only if you need to pre-render a page whose data must be fetched at request time
 
-export const getServerSideProps: GetServerSideProps = async ({ req, query }) => {
+/* export const getServerSideProps: GetServerSideProps = async ({ req, query }) => {
     const {id } = query
     return {
         props: {
@@ -209,7 +209,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, query }) => 
         }
     }
 }
-
+ */
 /* export const getServerSideProps: GetServerSideProps = async ({ req, query }) => {
     
     const { id = '' } = query;
