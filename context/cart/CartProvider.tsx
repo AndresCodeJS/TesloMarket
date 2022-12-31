@@ -162,8 +162,9 @@ export const CartProvider:FC = ({ children }) => {
 
 
         try {
-            
-            const { data } = await tesloApi.post<IOrder>('/orders', body);
+            console.log('se va a ejecutar la creacion de la orden')
+            /* const { data } = await tesloApi.post<IOrder>('/orders', {body}); */
+            const { data } = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/order/create`, {body, token: Cookie.get('token')});
 
             dispatch({ type: '[Cart] - Order complete' });
 

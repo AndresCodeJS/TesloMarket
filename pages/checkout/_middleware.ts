@@ -17,7 +17,7 @@ export async function middleware( req: NextRequest | any, ev: NextFetchEvent ) {
     return NextResponse.next(); */
 
 
-     const { token = '' } = req.cookies;
+    /*  const { token = '' } = req.cookies;
      // return new Response('No autorizado', {
      //     status: 401
      // });
@@ -28,7 +28,8 @@ export async function middleware( req: NextRequest | any, ev: NextFetchEvent ) {
          // return Response.redirect('/auth/login');
          const requestedPage = req.page.name;
          return NextResponse.redirect(`/auth/login?p=${ requestedPage }`);
-     }
+     } */
+     return NextResponse.next();
 
 }
 

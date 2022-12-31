@@ -3,7 +3,7 @@ import { jwt } from '../utils';
 
 export async function middleware( req: NextRequest | any, ev: NextFetchEvent ) {
 
-    const { token = "" } = req.cookies;
+   /*  const { token = "" } = req.cookies;
 
     const {userId, role} = await jwt.isValidToken(token)
 
@@ -17,7 +17,7 @@ export async function middleware( req: NextRequest | any, ev: NextFetchEvent ) {
     // if ( session.user.role !== 'admin' )  {
     if ( !validRoles.includes( role ) )  {
         return NextResponse.redirect(`/`);
-    }
+    } */
 
    /*  const session:any = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
 

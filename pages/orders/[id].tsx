@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { GetServerSideProps, NextPage } from 'next';
 /* import { getSession } from 'next-auth/react'; */
 import { useRouter } from 'next/router';
@@ -13,6 +13,8 @@ import { dbOrders } from '../../database';
 import { IOrder } from '../../interfaces';
 import { tesloApi } from '../../api';
 import { jwt } from '../../utils';
+import { useOrder } from '../../hooks/useOrder';
+import { FullScreenLoading } from '../../components/ui';
 
 
 export type OrderResponseBody = {
@@ -27,16 +29,21 @@ export type OrderResponseBody = {
 
 
 interface Props {
-    order: IOrder;
+    orderId:string;
 }
 
-const OrderPage: NextPage<Props> = ({ order }) => {
+const OrderPage: NextPage<Props> = ({orderId}) => {
 
 
     const router = useRouter();
-    const { shippingAddress } = order;
+    /* const { shippingAddress } = order; */
     const [isPaying, setIsPaying] = useState(false);
+    /* const [order, setOrder] = useState<IOrder>() */
+    const [order,getOrder] = useOrder(`${process.env.NEXT_PUBLIC_BACKEND_URL}/order/${orderId}`)
 
+    useEffect(()=>{
+        console.log('La ORDEN ES',order )
+    },[order])
 
     const onOrderCompleted = async( details: OrderResponseBody ) => {
         
@@ -61,6 +68,10 @@ const OrderPage: NextPage<Props> = ({ order }) => {
             alert('Error');
         }
 
+    }
+
+    if(!order._id){
+        return <FullScreenLoading />
     }
 
 
@@ -108,11 +119,11 @@ const OrderPage: NextPage<Props> = ({ order }) => {
                         </Box>
 
                         
-                        <Typography>{ shippingAddress.firstName } { shippingAddress.lastName }</Typography>
-                        <Typography>{ shippingAddress.address } { shippingAddress.address2 ? `, ${ shippingAddress.address2 }`: '' }</Typography>
-                        <Typography>{ shippingAddress.city }, { shippingAddress.zip }</Typography>
-                        <Typography>{ shippingAddress.country }</Typography>
-                        <Typography>{ shippingAddress.phone }</Typography>
+                        <Typography>{ order.shippingAddress.firstName } { order.shippingAddress.lastName }</Typography>
+                        <Typography>{ order.shippingAddress.address } { order.shippingAddress.address2 ? `, ${ order.shippingAddress.address2 }`: '' }</Typography>
+                        <Typography>{ order.shippingAddress.city }, { order.shippingAddress.zip }</Typography>
+                        <Typography>{ order.shippingAddress.country }</Typography>
+                        <Typography>{ order.shippingAddress.phone }</Typography>
 
                         <Divider sx={{ my:1 }} />
 
@@ -190,11 +201,18 @@ const OrderPage: NextPage<Props> = ({ order }) => {
 // You should use getServerSideProps when:
 // - Only if you need to pre-render a page whose data must be fetched at request time
 
-
 export const getServerSideProps: GetServerSideProps = async ({ req, query }) => {
+    const {id } = query
+    return {
+        props: {
+            orderId : id
+        }
+    }
+}
+
+/* export const getServerSideProps: GetServerSideProps = async ({ req, query }) => {
     
     const { id = '' } = query;
-    /* const session:any = await getSession({ req }); */
 
     const { token = "" } = req.cookies;
 
@@ -237,7 +255,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, query }) => 
             order
         }
     }
-}
+} */
 
 
 export default OrderPage;
