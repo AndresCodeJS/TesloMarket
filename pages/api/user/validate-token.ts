@@ -31,7 +31,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
 
 const checkJWT = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
     
-    const { token = ''  } = req.cookies;
+    /* const { token = ''  } = req.cookies;
 
     try {
         const {userId} = await jwt.isValidToken( token );
@@ -60,7 +60,7 @@ const checkJWT = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
             message: 'Token de autorización no es válido'
         })   
     }
-
+ */
 
    
 
