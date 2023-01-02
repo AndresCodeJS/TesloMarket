@@ -4,12 +4,12 @@ export interface IProduct {
     images: string[];
     inStock: number;
     price: number;
-    sizes?: ISize[];
+    sizes: ISize[];
     slug: string;
     tags: string[];
     title: string;
-    type?: IType;
-    gender?: 'men'|'women'|'kid'|'unisex'
+    type: any;
+    gender: any
 
     // TODO: agregar createdAt y updatedAt
     createdAt?: string;

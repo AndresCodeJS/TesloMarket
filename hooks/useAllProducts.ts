@@ -18,6 +18,9 @@ export const useAllProducts = (
       slug: '',
       tags: [],
       title: '',
+      gender:'',
+      type:'shirts',
+      sizes: []
     },
   ]);
 

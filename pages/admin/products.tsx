@@ -71,7 +71,7 @@ const ProductsPage = () => {
     }));
 
     if(products[0]._id === ''){
-
+        return 
     }
 
 
