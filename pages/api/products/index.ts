@@ -21,6 +21,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
 }
 
 const getProducts = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
+
+    console.log('ENTRA EN GET PRODUCTS')
     
     const { gender = 'all' } = req.query;
 
@@ -31,6 +33,7 @@ const getProducts = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
     }
 
     await db.connect();
+    console.log('SE CONECTO A LA BD')
     const products = await Product.find(condition)
                                 .select('title images price inStock slug -_id')
                                 .lean();

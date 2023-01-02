@@ -6,6 +6,7 @@ import useSWR from 'swr';
 
 import { AdminLayout } from '../../components/layouts'
 import { IProduct  } from '../../interfaces';
+import { useAllProducts } from '../../hooks/useAllProducts';
 
 
 const columns:GridColDef[] = [
@@ -51,11 +52,13 @@ const columns:GridColDef[] = [
 
 const ProductsPage = () => {
 
-    const { data, error } = useSWR<IProduct[]>('/api/admin/products');
+    /* const { data, error } = useSWR<IProduct[]>('/api/admin/products'); */
 
-    if ( !data && !error ) return (<></>);
+    const [products, getProducts ] = useAllProducts(`${process.env.NEXT_PUBLIC_BACKEND_URL}/product/all`)
+
+    /* if ( !data && !error ) return (<></>); */
     
-    const rows = data!.map( product => ({
+    const rows = products.map( product => ({
         id: product._id,
         img: product.images[0],
         title: product.title,
@@ -63,14 +66,18 @@ const ProductsPage = () => {
         type: product.type,
         inStock: product.inStock,
         price: product.price,
-        sizes: product.sizes.join(', '),
+        sizes: product.sizes?.join(', '),
         slug: product.slug,
     }));
+
+    if(products[0]._id === ''){
+
+    }
 
 
   return (
     <AdminLayout 
-        title={`Productos (${ data?.length })`} 
+        title={`Productos (${ products?.length })`} 
         subTitle={'Mantenimiento de productos'}
         icon={ <CategoryOutlined /> }
     >

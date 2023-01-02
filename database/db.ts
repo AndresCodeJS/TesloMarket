@@ -1,3 +1,4 @@
+import { Console } from 'console';
 import mongoose from 'mongoose';
 
 /**
@@ -24,7 +25,7 @@ export const connect = async() => {
             console.log('Usando conexión anterior');
             return;
         }
-
+ 
         await mongoose.disconnect();
     }
 
