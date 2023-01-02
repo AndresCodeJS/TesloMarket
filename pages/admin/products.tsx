@@ -52,13 +52,13 @@ const columns:GridColDef[] = [
 
 const ProductsPage = () => {
 
-    /* const { data, error } = useSWR<IProduct[]>('/api/admin/products'); */
+    const { data, error } = useSWR<IProduct[]>('/api/admin/products');
 
-    const [products, getProducts ] = useAllProducts(`${process.env.NEXT_PUBLIC_BACKEND_URL}/product/all`)
+    /* const [products, getProducts ] = useAllProducts(`${process.env.NEXT_PUBLIC_BACKEND_URL}/product/all`) */
 
     /* if ( !data && !error ) return (<></>); */
     
-    const rows = products.map( product => ({
+    const rows = data!.map( product => ({
         id: product._id,
         img: product.images[0],
         title: product.title,
@@ -70,14 +70,14 @@ const ProductsPage = () => {
         slug: product.slug,
     }));
 
-    if(products[0]._id === ''){
+   /*  if(products[0]._id === ''){
         return 
-    }
+    } */
 
 
   return (
     <AdminLayout 
-        title={`Productos (${ products?.length })`} 
+        title={`Productos (${ data?.length })`} 
         subTitle={'Mantenimiento de productos'}
         icon={ <CategoryOutlined /> }
     >
