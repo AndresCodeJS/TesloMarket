@@ -9,6 +9,8 @@ import { ShopLayout } from '../../components/layouts';
 import { dbOrders } from '../../database';
 import { IOrder } from '../../interfaces';
 import { jwt } from '../../utils';
+import { useOrders } from '../../hooks/useOrders';
+import { FullScreenLoading } from '../../components/ui';
 
 
 
@@ -36,7 +38,7 @@ const columns: GridColDef[] = [
         sortable: false,
         renderCell: (params: GridRenderCellParams) => {
             return (
-               <NextLink href={`/orders/${ params.row.orderId }`} passHref>
+               <NextLink href={`/orders?p=${ params.row.orderId }`} passHref>
                     <Link underline='always'>
                         Ver orden
                     </Link>
@@ -47,11 +49,13 @@ const columns: GridColDef[] = [
 ];
 
 
-interface Props {
+/* interface Props {
     orders: IOrder[]
-}
+} */
 
-const HistoryPage: NextPage<Props> = ({ orders }) => {
+const HistoryPage = () => {
+
+    const [orders,getOrders] = useOrders(`${process.env.NEXT_PUBLIC_BACKEND_URL}/order/history`)
 
     // const rows = ..  
     // { id: indice + 1, paid: true, fullname: 'Fernando Herrera', orderId: 1283781237123 }
@@ -61,6 +65,10 @@ const HistoryPage: NextPage<Props> = ({ orders }) => {
         fullname: `${ order.shippingAddress.firstName } ${ order.shippingAddress.lastName }`,
         orderId: order._id
     }))
+
+  if(orders[0]?.orderItems[0]?._id === ''){
+    return <FullScreenLoading/>
+  }
 
   return (
     <ShopLayout title={'Historial de ordenes'} pageDescription={'Historial de ordenes del cliente'}>
@@ -86,12 +94,12 @@ const HistoryPage: NextPage<Props> = ({ orders }) => {
 
 // You should use getServerSideProps when:
 // - Only if you need to pre-render a page whose data must be fetched at request time
-
+/* 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
 
     const { token = "" } = req.cookies;
 
-    const {userId, role} = await jwt.isValidToken(token)
+    const {userId, role} = await jwt.isValidToken(token) */
 
     
    /*  const session: any = await getSession({ req });
@@ -107,7 +115,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
 
     /* const orders = await dbOrders.getOrdersByUser( session.user._id ); */
 
-    const orders = await dbOrders.getOrdersByUser( userId );
+/*     const orders = await dbOrders.getOrdersByUser( userId );
 
 
     return {
@@ -115,7 +123,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
             orders
         }
     }
-}
+} */
 
 
 

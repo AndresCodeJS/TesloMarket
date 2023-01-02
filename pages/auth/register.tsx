@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
 
@@ -12,6 +12,7 @@ import { ErrorOutline } from '@mui/icons-material';
 import { AuthContext } from '../../context';
 import { AuthLayout } from '../../components/layouts'
 import { jwt, validations } from '../../utils';
+import Cookie from 'js-cookie'
 
 
 type FormData = {
@@ -31,6 +32,11 @@ const RegisterPage = () => {
     const [ showError, setShowError ] = useState(false);
     const [ errorMessage, setErrorMessage ] = useState('');
 
+/*     useEffect(() => {
+      router.replace('/')
+    }, [])
+     */
+
     const onRegisterForm = async( {  name, email, password }: FormData ) => {
         
         setShowError(false);
@@ -49,6 +55,10 @@ const RegisterPage = () => {
 
         /* await signIn('credentials',{ email, password }); */
 
+    }
+
+    if(Cookie.get('token')){
+        return <></>
     }
 
     return (
@@ -141,12 +151,12 @@ const RegisterPage = () => {
 
 
 
-export const getServerSideProps: GetServerSideProps = async ({ req, query }) => {
+/* export const getServerSideProps: GetServerSideProps = async ({ req, query }) => { */
     
     /* const session = await getSession({ req }); */
     // console.log({session});
 
-    const { token = "" } = req.cookies;
+  /*   const { token = "" } = req.cookies;
     const { p = '/' } = query;
 
     try{
@@ -171,6 +181,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req, query }) => 
     return {
         props: { }
     }
-}
+} */
 
 export default RegisterPage

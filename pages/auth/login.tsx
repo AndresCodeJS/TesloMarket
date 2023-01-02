@@ -8,6 +8,7 @@ import {
   Box,
   Button,
   Chip,
+  CircularProgress,
   Divider,
   Grid,
   Link,
@@ -29,9 +30,12 @@ type FormData = {
 };
 
 const LoginPage = () => {
-  const router = useRouter();
+  
   const { loginUser } = useContext(AuthContext);
+  const [isLoading,setIsLoading] = useState(false)
 
+
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -50,13 +54,15 @@ const LoginPage = () => {
 
   const onLoginUser = async ({ email, password }: FormData) => {
     setShowError(false);
-
+    setIsLoading(true)
     const isValidLogin = await loginUser(email, password);
     if (!isValidLogin) {
+      setIsLoading(false)
       setShowError(true);
       setTimeout(() => setShowError(false), 3000);
       return;
     }
+    setIsLoading(false)
     // Todo: navegar a la pantalla que el usuario estaba
     const destination = router.query.p?.toString() || "/";
     router.replace(destination);
@@ -122,7 +128,7 @@ const LoginPage = () => {
                 size="large"
                 fullWidth
               >
-                Ingresar
+                {isLoading?<CircularProgress/>:'Ingresar'}
               </Button>
             </Grid>
 

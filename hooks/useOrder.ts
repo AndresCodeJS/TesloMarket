@@ -43,24 +43,19 @@ export const useOrder = (
   }, []);
 
   const getOrder = async () => {
-    console.log('la URL es:',url);
+
     try {
-        
         const {data} = await axios.post(url, {
           token: Cookie.get("token"),
         });
 
-        console.log('LA DATA ES:',data )
-
         const orderAux: IOrder = data.order
     
-        console.log('la ORDEN en UseOrder es:',orderAux )
         setOrder(orderAux);
     } catch (error) {
         console.log(error)
         router.replace('/')
     }
-    /* return [order, getOrder] */
   };
 
   return [order, getOrder];

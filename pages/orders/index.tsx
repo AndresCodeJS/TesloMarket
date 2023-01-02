@@ -41,9 +41,6 @@ const OrderPage = () => {
     /* const [order, setOrder] = useState<IOrder>() */
     const [order,getOrder] = useOrder(`${process.env.NEXT_PUBLIC_BACKEND_URL}/order/${router.query.p}`)
 
-    useEffect(()=>{
-        console.log('La ORDEN ES',router)
-    },[order])
 
     const onOrderCompleted = async( details: OrderResponseBody ) => {
         
