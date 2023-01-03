@@ -20,7 +20,7 @@ const columns:GridColDef[] = [
                         component='img'
                         alt={ row.title }
                         className='fadeIn'
-                        image={ row.img }
+                        image={ row.img?.includes("cloudinary")?row.img:`/products/${row.img}` }
                     />
                 </a>
             )
@@ -52,13 +52,13 @@ const columns:GridColDef[] = [
 
 const ProductsPage = () => {
 
-    const { data, error } = useSWR<IProduct[]>('/api/admin/products');
+   /*  const { data, error } = useSWR<IProduct[]>('/api/admin/products'); */
 
-    /* const [products, getProducts ] = useAllProducts(`${process.env.NEXT_PUBLIC_BACKEND_URL}/product/all`) */
+    const [products, getProducts ] = useAllProducts(`${process.env.NEXT_PUBLIC_BACKEND_URL}/product/all`)
 
     /* if ( !data && !error ) return (<></>); */
     
-    const rows = data!.map( product => ({
+    const rows = products.map( product => ({
         id: product._id,
         img: product.images[0],
         title: product.title,
@@ -70,14 +70,14 @@ const ProductsPage = () => {
         slug: product.slug,
     }));
 
-   /*  if(products[0]._id === ''){
-        return 
-    } */
-
+  /*   if(products[0]._id === ''){
+        return <></>
+    }
+ */
 
   return (
     <AdminLayout 
-        title={`Productos (${ data?.length })`} 
+        title={`Productos (${ products.length })`} 
         subTitle={'Mantenimiento de productos'}
         icon={ <CategoryOutlined /> }
     >
