@@ -14,9 +14,9 @@ export const getProductBySlug = async( slug: string ): Promise<IProduct> => {
         return null;
     } */
 
-    product.images = product.images.map( image => {
+   /*  product.images = product.images.map( image => {
         return image.includes('http') ? image : `${ process.env.HOST_NAME}products/${ image }`
-    });
+    }); */
 
     return JSON.parse( JSON.stringify( product ) );
 }
