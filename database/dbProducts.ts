@@ -5,18 +5,18 @@ import { IProduct } from '../interfaces';
 
 
 export const getProductBySlug = async( slug: string ): Promise<IProduct> => {
-    console.log('el SLUG es:',slug )
+
     await db.connect();
     const product = await Product.findOne({ slug }).lean();
     await db.disconnect();
 
-    /* if ( !product ) {
+   /*  if ( !product ) {
         return null;
     } */
 
-   /*  product.images = product.images.map( image => {
+    product.images = product!.images.map( image => {
         return image.includes('http') ? image : `${ process.env.HOST_NAME}products/${ image }`
-    }); */
+    });
 
     return JSON.parse( JSON.stringify( product ) );
 }
