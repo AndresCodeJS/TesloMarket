@@ -3,6 +3,7 @@ import NextLink from 'next/link';
 import { Grid, Card, CardActionArea, CardMedia, Box, Typography, Link, Chip } from '@mui/material'
 
 import { IProduct } from '../../interfaces'
+import { modifyImageUrl } from '../../utils/images';
 
 interface Props {
     product: IProduct;
@@ -15,8 +16,8 @@ export const ProductCard: FC<Props> = ({ product }) => {
 
     const productImage = useMemo(() => {
         return isHovered
-        ? product.images[1]
-        : product.images[0];
+        ? modifyImageUrl(product.images[1]) 
+        : modifyImageUrl(product.images[0]);
 
     }, [isHovered, product.images])
 

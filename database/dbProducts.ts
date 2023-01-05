@@ -4,15 +4,15 @@ import { IProduct } from '../interfaces';
 
 
 
-export const getProductBySlug = async( slug: string ): Promise<IProduct | null> => {
-
+export const getProductBySlug = async( slug: string ): Promise<IProduct> => {
+    console.log('el SLUG es:',slug )
     await db.connect();
     const product = await Product.findOne({ slug }).lean();
     await db.disconnect();
 
-    if ( !product ) {
+    /* if ( !product ) {
         return null;
-    }
+    } */
 
     product.images = product.images.map( image => {
         return image.includes('http') ? image : `${ process.env.HOST_NAME}products/${ image }`
@@ -48,16 +48,17 @@ export const getProductsByTerm = async ( term:string): Promise<IProduct[]> => {
 
     await db.disconnect();
 
-    const updatedProducts = products.map( product => {
+    /* const updatedProducts = products.map( product => {
         product.images = product.images.map( image => {
             return image.includes('http') ? image : `${ process.env.HOST_NAME}products/${ image }`
         });
 
         return product;
-    })
+    }) */
 
 
-    return updatedProducts;
+    /* return updatedProducts; */
+    return products
 }
 
 
@@ -68,15 +69,16 @@ export const getAllProducts = async(): Promise<IProduct[]> => {
     await db.disconnect();
 
 
-    const updatedProducts = products.map( product => {
+    /* const updatedProducts = products.map( product => {
         product.images = product.images.map( image => {
             return image.includes('http') ? image : `${ process.env.HOST_NAME}products/${ image }`
         });
         return product;
-    });
+    }); */
 
 
-    return JSON.parse( JSON.stringify( updatedProducts ) );
+    /* return JSON.parse( JSON.stringify( updatedProducts ) ); */
+    return JSON.parse( JSON.stringify( products ) );
 }
 
 

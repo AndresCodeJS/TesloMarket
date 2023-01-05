@@ -968,14 +968,14 @@
   "resolved" "https://registry.npmjs.org/cloudinary-core/-/cloudinary-core-2.12.3.tgz"
   "version" "2.12.3"
 
-"cloudinary@^1.28.1":
-  "integrity" "sha512-iCSgX/GjyNRYUf/1kQgyLl8UdhPKUWIxsAvCD0qjUcnnIZqHk5tJQmCt5YpGh/r1tVdKa4TV/iDB12S33Zjy0w=="
-  "resolved" "https://registry.npmjs.org/cloudinary/-/cloudinary-1.28.1.tgz"
-  "version" "1.28.1"
+"cloudinary@^1.33.0":
+  "integrity" "sha512-pdqOgd2QAMCFWujdYw1yhZ+lHPTzc6YIfg4WIvbRyoojIbSd/YgnHT8OSnk/OM4Q1WPFD5FM9EEom+4ehG80IA=="
+  "resolved" "https://registry.npmjs.org/cloudinary/-/cloudinary-1.33.0.tgz"
+  "version" "1.33.0"
   dependencies:
     "cloudinary-core" "^2.10.2"
-    "core-js" "3.6.5"
-    "lodash" "^4.17.11"
+    "core-js" "^3.6.5"
+    "lodash" "^4.17.21"
     "q" "^1.5.1"
   optionalDependencies:
     "proxy-agent" "^5.0.0"
@@ -1024,7 +1024,7 @@
   "resolved" "https://registry.npmjs.org/core-js-pure/-/core-js-pure-3.21.0.tgz"
   "version" "3.21.0"
 
-"core-js@3.6.5":
+"core-js@^3.6.5":
   "integrity" "sha512-vZVEEwZoIsI+vPEuoF9Iqf5H7/M3eeQqWlQnYa8FSKKePuYTf5MWnxb5SDAzCa60b3JBRS5g9b+Dq7b1y/RCrA=="
   "resolved" "https://registry.npmjs.org/core-js/-/core-js-3.6.5.tgz"
   "version" "3.6.5"
@@ -2114,7 +2114,7 @@
   "resolved" "https://registry.npmjs.org/lodash.once/-/lodash.once-4.1.1.tgz"
   "version" "4.1.1"
 
-"lodash@^4.17.11", "lodash@>=4.0":
+"lodash@^4.17.21", "lodash@>=4.0":
   "integrity" "sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg=="
   "resolved" "https://registry.npmjs.org/lodash/-/lodash-4.17.21.tgz"
   "version" "4.17.21"

@@ -36,7 +36,7 @@ const columns: GridColDef[] = [
     headerName: "Ver orden",
     renderCell: (params: GridRenderCellParams) => {
       return (
-        <NextLink href={`/orders?p=${params.row.orderId}`} passHref >
+        <NextLink href={`/orders?p=${params.row.orderId}`} passHref>
           <Link underline="always">Ver orden</Link>
         </NextLink>
       );
@@ -59,21 +59,21 @@ const OrdersPage = () => {
 
   /* if ( !data && !error ) return (<></>); */
 
-  const rows = orders!.map((order,idx) => ({
-    id: idx +1,
+  const rows = orders!.map((order, idx) => ({
+    id: idx + 1,
     email: (order.user as IUser).email,
     name: (order.user as IUser).name,
     total: order.total,
     isPaid: order.isPaid,
     noProducts: order.numberOfItems,
     createdAt: order.createdAt,
-    orderId: order._id
+    orderId: order._id,
   }));
 
-  if (orders[0]?.orderItems[0]?._id === "") {
+  /*  if (orders[0]?.orderItems[0]?._id === "") {
     console.log("Pantalla de login", orders);
     return <FullScreenLoading />;
-  }
+  } */
 
   return (
     <AdminLayout
@@ -81,16 +81,20 @@ const OrdersPage = () => {
       subTitle={"Mantenimiento de ordenes"}
       icon={<ConfirmationNumberOutlined />}
     >
-      <Grid container className="fadeIn">
-        <Grid item xs={12} sx={{ height: 650, width: "100%" }}>
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            pageSize={10}
-            rowsPerPageOptions={[10]}
-          />
+      {orders[0]?.orderItems[0]?._id === "" ? (
+        <FullScreenLoading />
+      ) : (
+        <Grid container className="fadeIn">
+          <Grid item xs={12} sx={{ height: 650, width: "100%" }}>
+            <DataGrid
+              rows={rows}
+              columns={columns}
+              pageSize={10}
+              rowsPerPageOptions={[10]}
+            />
+          </Grid>
         </Grid>
-      </Grid>
+      )}
     </AdminLayout>
   );
 };

@@ -16,9 +16,13 @@ export const Navbar = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [isSearchVisible, setIsSearchVisible] = useState(false);
 
+    const router = useRouter()
+
     const onSearchTerm = () => {
         if( searchTerm.trim().length === 0 ) return;
-        push(`/search/${ searchTerm }`);
+        router.push(`/search?searchTerm=${ searchTerm }`);
+        setSearchTerm('')
+        setIsSearchVisible(false)
     }
 
     

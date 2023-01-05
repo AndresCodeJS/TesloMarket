@@ -17,11 +17,13 @@ export const SideMenu = () => {
 
     const onSearchTerm = () => {
         if( searchTerm.trim().length === 0 ) return;
-        navigateTo(`/search/${ searchTerm }`);
+        navigateTo(`/search?searchTerm=${ searchTerm }`);
+        setSearchTerm('')
     }
 
     
     const navigateTo = ( url: string ) => {
+        console.log('intenta navegar')
         toggleSideMenu();
         router.push(url);
     }
