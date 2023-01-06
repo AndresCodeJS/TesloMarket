@@ -52,12 +52,10 @@ export const AuthProvider:FC = ({ children }) => {
         try {
             /* const { data } = await tesloApi.get('/user/validate-token'); */
             const { data } = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/user/validate-token`, {token:Cookies.get('token')});
-            console.log('la data eeees:',data )
             const { token, user } = data;
             Cookies.set('token', token );
             dispatch({ type: '[Auth] - Login', payload: user });
         } catch (error) {
-            console.log('removio el token')
             Cookies.remove('token');
         }
     }

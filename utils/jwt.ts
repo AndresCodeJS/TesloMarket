@@ -23,7 +23,6 @@ export const signToken = ( _id: string, email: string, role:string ) => {
 
 
 export const isValidToken = ( token: string ):Promise<{userId:string,role:string}> => {
-    console.log('entro en isvalidtoken')
     if ( !process.env.JWT_SECRET_SEED ) {
         throw new Error('No hay semilla de JWT - Revisar variables de entorno');
     }
@@ -34,13 +33,9 @@ export const isValidToken = ( token: string ):Promise<{userId:string,role:string
 
     return new Promise( (resolve, reject) => {
 
-        console.log('pasa por la promesa, con el token :', token, process.env.JWT_SECRET_SEED)
-
         try {
              jwt.verify( token, process.env.JWT_SECRET_SEED || '', (err, payload) => {
                 if ( err ) return reject('JWT no es válidooo');
-
-                console.log('proceso EXITOSOOO', payload)
 
                 const { _id , role } = payload as { _id: string, role: string};
 

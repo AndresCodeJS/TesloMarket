@@ -50,9 +50,6 @@ export const useOrders = (
   }, []);
 
   const getOrders = async () => {
-    console.log("EL TOKEN ES:", Cookie.get("token"));
-
-    console.log('LA URL ES ', url)
 
     try {
       if (!Cookie.get("token")) {
@@ -61,8 +58,6 @@ export const useOrders = (
       const { data } = await axios.post(url, {
         token: Cookie.get("token"),
       });
-
-      console.log("el resultado es", data);
 
       const ordersAux = data.orders;
 

@@ -100,11 +100,6 @@ const ProductAdminPage: FC = () => {
   }, [watch, setValue]);
 
   useEffect(() => {
-   /*  if (product._id) {
-      setValue("_id", product._id);
-    } */
-
-    console.log('la booleana es:',isNew )
 
     if(!isNew){
         setValue("_id", product._id);
@@ -200,22 +195,12 @@ const ProductAdminPage: FC = () => {
     if (form.images.length < 2) return alert("Mínimo 2 imagenes");
     if (form.sizes.length === 0) return alert("Elija una talla");
     setIsSaving(true);
-    console.log('entra en onSubmit')
     try {
-      /* const { data } = await tesloApi({
-        url: "/admin/products",
-        method: form._id ? "PUT" : "POST", // si tenemos un _id, entonces actualizar, si no crear
-        data: form,
-      }); */
-
       if(form._id){
         const { data } = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/product/update`, form)
-        console.log(`El producto actualizado es`,{ data });
       }else{
         delete form._id
-        console.log('va a llamar la creacion de producto', form)
         const { data } = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/product/create`, form)
-        console.log(`El producto creado es`,{ data });
       }
 
       if (!form._id) {

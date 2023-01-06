@@ -9,6 +9,7 @@ import {useSearch} from '../../hooks/index'
 import { dbProducts } from '../../database';
 import { IProduct } from '../../interfaces';
 import { useRouter } from 'next/router';
+import { FullScreenLoading } from '../../components/ui';
 
 
 /* interface Props {
@@ -30,7 +31,7 @@ const [products,searching] = useSearch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/p
     <ShopLayout title={'Teslo-Shop - Search'} pageDescription={'Encuentra los mejores productos de Teslo aquí'}>
         <Typography variant='h1' component='h1'>Buscar productos</Typography>
 
-        {
+        {searching?<FullScreenLoading/>:
             products.length>0 
                 ? <><Typography variant='h2' sx={{ mb: 1 }} textTransform="capitalize">Término: { searchTerm }</Typography>
                   <ProductList products={ products } />
@@ -42,11 +43,6 @@ const [products,searching] = useSearch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/p
                     </Box>
                 )
         }
-
-        
-
-        
-        
         
     </ShopLayout>
   )

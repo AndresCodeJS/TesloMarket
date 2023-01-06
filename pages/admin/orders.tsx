@@ -70,11 +70,6 @@ const OrdersPage = () => {
     orderId: order._id,
   }));
 
-  /*  if (orders[0]?.orderItems[0]?._id === "") {
-    console.log("Pantalla de login", orders);
-    return <FullScreenLoading />;
-  } */
-
   return (
     <AdminLayout
       title={"Ordenes"}

@@ -42,10 +42,9 @@ export const useProduct = (url:string,
   const getProduct = async () => {
   
     try {
-        console.log('entra a getProduct con el url:',url,' y slug:', slug );
         
         const {data} = await axios.post(url);
-        console.log('el resultado es:',data )
+
         if(!data){
             return
         }

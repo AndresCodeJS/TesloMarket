@@ -21,8 +21,6 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
 }
 
 const getProducts = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
-
-    console.log('ENTRA EN GET PRODUCTS')
     
     const { gender = 'all' } = req.query;
 

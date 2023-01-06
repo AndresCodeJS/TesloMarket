@@ -23,7 +23,6 @@ export const SideMenu = () => {
 
     
     const navigateTo = ( url: string ) => {
-        console.log('intenta navegar')
         toggleSideMenu();
         router.push(url);
     }
