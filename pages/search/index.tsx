@@ -28,7 +28,7 @@ import { FullScreenLoading } from '../../components/ui';
 const [products,searching] = useSearch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/product/search/${searchTerm}`, searchTerm)
 
   return (
-    <ShopLayout title={'Teslo-Shop - Search'} pageDescription={'Encuentra los mejores productos de Teslo aquí'}>
+    <ShopLayout title={'Teslo-Market - Search'} pageDescription={'Encuentra los mejores productos de Teslo aquí'}>
         <Typography variant='h1' component='h1'>Buscar productos</Typography>
 
         {searching?<FullScreenLoading/>:
